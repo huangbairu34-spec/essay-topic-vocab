@@ -70,7 +70,7 @@ qr_html = f'''<!DOCTYPE html>
 <body>
   <div class="card">
     <h1>📝 考研英语作文主题词</h1>
-    <p class="sub">英一 2001-2025 · 英二 2010-2025 · 7大高分分类<br>请确保手机与电脑连接【同一 Wi-Fi】</p>
+    <p class="sub">英一 2001-2026 · 英二 2010-2026 · 7大高分分类<br>请确保手机与电脑连接【同一 Wi-Fi】</p>
     <div class="qr-wrap">
       <img src="https://api.qrserver.com/v1/create-qr-code/?size=240x240&data={primary_url}" alt="扫码打开">
     </div>
