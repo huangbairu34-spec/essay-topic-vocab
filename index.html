@@ -761,47 +761,386 @@
     }
 
     /* ============================================================
-       MODE 4: 💡 写作指南 (Guide View)
+       MODE 4: 💡 写作指南 (Guide View - 2026/2027 三段论结构化扩充版)
        ============================================================ */
     .view-guide {
       display: none;
       flex-direction: column;
-      gap: 14px;
+      gap: 16px;
+      padding-bottom: 24px;
     }
+
+    /* Paragraph Stage Selector (第一段 / 第二段 / 第三段 / 小作文) */
+    .guide-stage-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 6px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      margin-bottom: 2px;
+    }
+    .guide-stage-btn {
+      flex: 1 1 calc(33.33% - 6px);
+      min-width: 95px;
+      padding: 8px 6px;
+      border-radius: 10px;
+      font-size: 12.5px;
+      font-weight: 700;
+      text-align: center;
+      background: transparent;
+      color: var(--text-muted);
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+    }
+    @media (max-width: 480px) {
+      .guide-stage-btn {
+        flex: 1 1 calc(50% - 6px);
+        font-size: 12px;
+      }
+    }
+    .guide-stage-btn:hover {
+      color: var(--primary);
+      background: rgba(79, 70, 229, 0.06);
+    }
+    .guide-stage-btn.active {
+      background: var(--primary);
+      color: #fff;
+      box-shadow: 0 2px 8px rgba(79, 70, 229, 0.3);
+    }
+
+    /* Guide Theme Pills Filter Bar (Wrapped & Responsive) */
+    .guide-filter-wrapper {
+      position: relative;
+      margin-bottom: 4px;
+    }
+    .guide-filter-bar {
+      display: flex;
+      flex-wrap: wrap; /* Allows wrapping so all 7 categories are always visible! */
+      gap: 7px;
+      padding: 4px 2px;
+    }
+    .guide-pill {
+      padding: 6px 12px;
+      border-radius: 18px;
+      font-size: 12px;
+      font-weight: 600;
+      background: var(--card-bg);
+      color: var(--text-muted);
+      border: 1px solid var(--card-border);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+      user-select: none;
+    }
+    .guide-pill:hover {
+      color: var(--primary);
+      border-color: var(--primary);
+      background: rgba(79, 70, 229, 0.04);
+    }
+    .guide-pill.active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+      box-shadow: 0 2px 6px rgba(79, 70, 229, 0.25);
+    }
+
+    /* Guide Search Bar */
+    .guide-search-wrapper {
+      position: relative;
+      margin-bottom: 4px;
+    }
+    .guide-search-input {
+      width: 100%;
+      padding: 11px 40px 11px 36px;
+      border-radius: 14px;
+      border: 1px solid var(--card-border);
+      background: var(--card-bg);
+      color: var(--text);
+      font-size: 13.5px;
+      box-sizing: border-box;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .guide-search-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+    }
+    .guide-search-icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 15px;
+      color: var(--text-muted);
+      pointer-events: none;
+    }
+    .guide-search-clear {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 15px;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: none;
+    }
+
+    /* Guide Theme & Card Styles */
     .guide-card {
       background: var(--card-bg);
-      border-radius: 16px;
+      border-radius: 18px;
       border: 1px solid var(--card-border);
-      padding: 18px;
+      padding: 18px 20px;
       box-shadow: var(--shadow);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
-    .guide-card h3 {
-      font-size: 16px;
+    .guide-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--card-border);
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .guide-card-header h3 {
+      font-size: 15.5px;
       font-weight: 800;
       color: var(--primary);
-      margin-bottom: 10px;
+      margin: 0;
       display: flex;
       align-items: center;
       gap: 6px;
     }
-    .guide-card p, .guide-card li {
+    .guide-theme-badge {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 9px;
+      border-radius: 10px;
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      letter-spacing: 0.3px;
+    }
+
+    /* Paragraph Sub-section inside Theme Cards */
+    .theme-para-section {
+      margin-top: 14px;
+      padding-top: 10px;
+      border-top: 1px dashed var(--card-border);
+    }
+    .theme-para-title {
       font-size: 13px;
+      font-weight: 800;
       color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 8px;
+    }
+    .para-badge {
+      font-size: 10.5px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 6px;
+      background: #e0e7ff;
+      color: #3730a3;
+    }
+    [data-theme="dark"] .para-badge {
+      background: #312e81;
+      color: #c7d2fe;
+    }
+
+    /* Framework Blocks */
+    .framework-block {
+      background: rgba(248, 250, 252, 0.7);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 12px 14px;
+      margin-top: 10px;
+    }
+    [data-theme="dark"] .framework-block {
+      background: rgba(30, 41, 59, 0.5);
+    }
+    .framework-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .framework-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .framework-tag {
+      font-size: 10.5px;
+      font-weight: 600;
+      padding: 2px 7px;
+      border-radius: 6px;
+    }
+    .tag-pos {
+      background: #ecfdf5;
+      color: #059669;
+      border: 1px solid #a7f3d0;
+    }
+    .tag-ref {
+      background: #fff7ed;
+      color: #c2410c;
+      border: 1px solid #fed7aa;
+    }
+    [data-theme="dark"] .tag-pos {
+      background: #064e3b;
+      color: #a7f3d0;
+      border-color: #047857;
+    }
+    [data-theme="dark"] .tag-ref {
+      background: #7c2d12;
+      color: #fed7aa;
+      border-color: #9a3412;
+    }
+
+    .btn-copy-template {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 10px;
+      border-radius: 7px;
+      font-size: 11.5px;
+      font-weight: 600;
+      background: var(--card-bg);
+      color: var(--primary);
+      border: 1px solid var(--primary);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+    .btn-copy-template:hover {
+      background: var(--primary);
+      color: #fff;
+    }
+    .btn-copy-template:active {
+      transform: scale(0.96);
+    }
+
+    /* Template Text & Slot Styling */
+    .template-en {
+      font-size: 13px;
       line-height: 1.7;
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      margin-bottom: 8px;
+      text-align: justify;
     }
-    .guide-card ul {
-      padding-left: 20px;
-      margin: 8px 0;
+    .template-slot {
+      background: #ede9fe;
+      color: #5b21b6;
+      font-weight: 700;
+      padding: 1px 5px;
+      border-radius: 5px;
+      border-bottom: 2px solid #8b5cf6;
+      display: inline-block;
+      margin: 1px 2px;
+      font-size: 12px;
     }
+    [data-theme="dark"] .template-slot {
+      background: #4c1d95;
+      color: #ddd6fe;
+      border-bottom-color: #a78bfa;
+    }
+    .template-cn {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      padding-top: 6px;
+      border-top: 1px dashed var(--card-border);
+    }
+
+    /* Ideas & Dimensions */
+    .ideas-box {
+      font-size: 12.5px;
+      color: var(--text);
+      line-height: 1.65;
+      background: rgba(238, 242, 255, 0.5);
+      border-radius: 12px;
+      padding: 10px 12px;
+      border-left: 4px solid var(--primary);
+      margin-bottom: 10px;
+    }
+    [data-theme="dark"] .ideas-box {
+      background: rgba(49, 46, 129, 0.25);
+    }
+    .ideas-box strong {
+      color: var(--primary);
+    }
+
+    /* Vocabulary & Phrase Pills */
+    .vocab-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-top: 6px;
+    }
+    .vocab-pill {
+      font-size: 11px;
+      padding: 3px 8px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 7px;
+      color: var(--text);
+      font-family: monospace, sans-serif;
+    }
+
+    /* Case Accordion */
+    .case-toggle {
+      margin-top: 10px;
+      font-size: 12px;
+      color: var(--primary);
+      cursor: pointer;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      user-select: none;
+    }
+    .case-content {
+      display: none;
+      margin-top: 6px;
+      padding: 10px 12px;
+      background: rgba(241, 245, 249, 0.6);
+      border-radius: 10px;
+      font-size: 12px;
+      line-height: 1.65;
+      color: var(--text);
+    }
+    [data-theme="dark"] .case-content {
+      background: rgba(15, 23, 42, 0.5);
+    }
+    .case-content.open { display: block; }
+
+    /* Tables */
     .table-compare {
       width: 100%;
       border-collapse: collapse;
-      margin: 10px 0;
-      font-size: 12px;
+      margin: 8px 0;
+      font-size: 11.5px;
     }
     .table-compare th, .table-compare td {
       border: 1px solid var(--card-border);
-      padding: 8px 6px;
+      padding: 7px 5px;
       text-align: center;
     }
     .table-compare th {
@@ -1003,52 +1342,965 @@
       </div>
     </div>
 
-    <!-- VIEW 4: 💡 写作指南 (Guide View) -->
+    <!-- VIEW 4: 💡 写作指南 (Guide View - 2026/2027 三段论结构化扩充版) -->
     <div class="view-guide" id="viewGuide">
-      <div class="guide-card">
-        <h3>🏆 考研英语大小作文三段论黄金骨架</h3>
+      
+      <!-- Stage Nav: 按第一段 / 第二段 / 第三段集中学习切换 -->
+      <div class="guide-stage-nav">
+        <button class="guide-stage-btn active" data-stage="all" onclick="switchGuideStage('all', this)">📖 全部内容</button>
+        <button class="guide-stage-btn" data-stage="p1" onclick="switchGuideStage('p1', this)">🎬 第一段：首段</button>
+        <button class="guide-stage-btn" data-stage="p2" onclick="switchGuideStage('p2', this)">💡 第二段：7大主题</button>
+        <button class="guide-stage-btn" data-stage="p3" onclick="switchGuideStage('p3', this)">🏁 第三段：尾段</button>
+        <button class="guide-stage-btn" data-stage="small" onclick="switchGuideStage('small', this)">✉️ 小作文</button>
+        <button class="guide-stage-btn" data-stage="strategy" onclick="switchGuideStage('strategy', this)">🌟 备考策略</button>
+      </div>
+
+      <!-- Theme Pills: 7大核心主题快捷筛选 (全展换行，彻底杜绝滑动遮挡) -->
+      <div class="guide-filter-wrapper">
+        <div class="guide-filter-bar" id="guideThemePills">
+          <div class="guide-pill active" data-theme="all" onclick="filterGuideByTheme('all', this)">全部主题</div>
+          <div class="guide-pill" data-theme="t1" onclick="filterGuideByTheme('t1', this)">1️⃣ 经济消费</div>
+          <div class="guide-pill" data-theme="t2" onclick="filterGuideByTheme('t2', this)">2️⃣ 意志品质</div>
+          <div class="guide-pill" data-theme="t3" onclick="filterGuideByTheme('t3', this)">3️⃣ 校园教育</div>
+          <div class="guide-pill" data-theme="t4" onclick="filterGuideByTheme('t4', this)">4️⃣ 文化自信</div>
+          <div class="guide-pill" data-theme="t5" onclick="filterGuideByTheme('t5', this)">5️⃣ 体育健康</div>
+          <div class="guide-pill" data-theme="t6" onclick="filterGuideByTheme('t6', this)">6️⃣ 科技创新</div>
+          <div class="guide-pill" data-theme="t7" onclick="filterGuideByTheme('t7', this)">7️⃣ 民生生态</div>
+        </div>
+      </div>
+
+      <!-- Guide Inline Search Box -->
+      <div class="guide-search-wrapper">
+        <span class="guide-search-icon">🔍</span>
+        <input type="text" id="guideSearchInput" class="guide-search-input" placeholder="搜索写作指南/主题模板 (如: 经济, 机器人, 建议信, 坚持, 尾段...)" oninput="handleGuideSearch()">
+        <span id="guideSearchClear" class="guide-search-clear" onclick="clearGuideSearch()">✕</span>
+      </div>
+
+      <!-- ================= PART 0: 备考全局与评分标准 ================= -->
+      <div class="guide-card" data-guide-stage="strategy" data-guide-cat="strategy">
+        <div class="guide-card-header">
+          <h3>🏆 考研英语大小作文通关全局策略与阅卷标准</h3>
+          <span class="guide-theme-badge">核心准则</span>
+        </div>
         <table class="table-compare">
           <tr>
-            <th>段落</th>
-            <th>英语一 (漫画作文)</th>
-            <th>英语二 (图表作文)</th>
+            <th>试卷与题型</th>
+            <th>字数要求</th>
+            <th>分值</th>
+            <th>考场推荐用时</th>
+            <th>核心底层逻辑</th>
           </tr>
           <tr>
-            <td><strong>第一段 (描述)</strong></td>
-            <td>图画精炼描摹 + 点出象征寓意 (symbolic meaning)</td>
-            <td>图表总趋势 + 关键数据对比极值 (soar/decline/rank first)</td>
+            <td><strong>英语一 (大作文+小作文)</strong></td>
+            <td>小作文约100词<br>大作文160~200词</td>
+            <td>10分 + 20分<br>= <strong>30分</strong></td>
+            <td>小作文15分钟<br>大作文25分钟</td>
+            <td>议论文三段论：透过图画/图表看本质，二三段论证相通</td>
           </tr>
           <tr>
-            <td><strong>第二段 (阐释)</strong></td>
-            <td>深层原因分析 (社会/家庭/个人) / 利弊辩证剖析</td>
-            <td>两大主因归因展开 (经济发展/政策支持/观念升级)</td>
-          </tr>
-          <tr>
-            <td><strong>第三段 (结论)</strong></td>
-            <td>提出可行性建议 (呼吁监管/自我约束) + 升华展望</td>
-            <td>总结趋势走向 + 提出合理建议措施 (embrace/cultivate)</td>
+            <td><strong>英语二 (大作文+小作文)</strong></td>
+            <td>小作文约100词<br>大作文约150词</td>
+            <td>10分 + 15分<br>= <strong>25分</strong></td>
+            <td>小作文15分钟<br>大作文25分钟</td>
+            <td>图表极值趋势引入 + 两大主因归因 + 科学建议措施</td>
           </tr>
         </table>
+        <div class="ideas-box" style="margin-top:10px;">
+          <strong>💡 考场提分四大军规：</strong><br>
+          1. <strong>卷面整洁</strong>：段落首行缩进4字符，行数控制在18~20行，字迹清晰圆润无涂改。<br>
+          2. <strong>句式亮点</strong>：全篇保证穿插1处倒装句（<code>Only when... can we...</code>）、1处强调句（<code>It is... that...</code>）、1处定语从句/非谓语动词。<br>
+          3. <strong>词汇替换</strong>：重要用 <code>crucial / indispensable / pivotal</code>，解决用 <code>tackle / grapple with / resolve</code>，促进用 <code>foster / stimulate / pave the way for</code>。<br>
+          4. <strong>立意高远</strong>：紧扣高质量发展、立德树人、身心健康、文化自信、数字赋能等时代主流价值观。
+        </div>
       </div>
 
-      <div class="guide-card">
-        <h3>💡 阅卷老师最喜欢的四大提分技巧</h3>
-        <ul>
-          <li><strong>词汇升级（拒绝重复）</strong>：重要不用 important，用 `crucial, indispensable, pivotal`；解决不用 solve，用 `tackle, grapple with, resolve`；发展不用 develop，用 `make headway, flourish`。</li>
-          <li><strong>句式多样化</strong>：每篇作文保证有 1 处倒装句 (`Only in this way can we...`)、1 处强调句 (`It is ... that ...`)、1 处非谓语动词作状语或定语从句。</li>
-          <li><strong>逻辑衔接紧密</strong>：善用 `in this context`（在此背景下）、`in the light of`（鉴于/随着）、`thanks to one's sustained efforts`（由于持续努力）。</li>
-          <li><strong>立意高远积极</strong>：结尾段善于结合中国式现代化、文化自信、高质量发展、绿色低碳等新时代主流价值观升华主题。</li>
-        </ul>
+      <!-- ================= PART 1: 第一段·首段集中突破模块 ================= -->
+      <div class="guide-card" data-guide-stage="p1" data-guide-cat="p1">
+        <div class="guide-card-header">
+          <h3>🎬 第一段：首段引出与图画/图表万能公式专练</h3>
+          <span class="guide-theme-badge">首段突破</span>
+        </div>
+        <div class="ideas-box">
+          <strong>📌 首段核心任务与原则：</strong><br>
+          • <strong>字数控制</strong>：35~45 词，写 2~3 句话即可，切忌长篇大论喧宾夺主；<br>
+          • <strong>英语一（图画/漫画）</strong>：步骤一精炼描摹动作 ➔ 步骤二细节或字幕说明 ➔ 步骤三点明象征寓意（<code>symbolic meaning</code>）；<br>
+          • <strong>英语二（图表）</strong>：步骤一指出图表类型与调查主题 ➔ 步骤二描述关键数据极值或增减走势 ➔ 步骤三引出广泛社会关注。
+        </div>
+
+        <!-- 英语一图画首段公式 -->
+        <div class="framework-block">
+          <div class="framework-header">
+            <span class="framework-title">🎨 英语一·图画作文万能首段（描摹 + 细节 + 寓意）</span>
+            <button class="btn-copy-template" onclick="copyTemplate('g_p1_cartoon', this)">📋 复制公式</button>
+          </div>
+          <div class="template-en" id="g_p1_cartoon">The cartoon vividly depicts an intriguing and thought-provoking scene in which <span class="template-slot">[主要人物动作描摹]</span>. Specifically, <span class="template-slot">[细节对比或画面文字说明]</span>. Simple as the picture is, its symbolic meaning is exceedingly profound: it profoundly mirrors <span class="template-slot">[主题词/核心社会现象]</span>, which undeniably warrants our deep contemplation.</div>
+          <div class="template-cn"><strong>【中文对照】</strong>这幅漫画生动描摹了一个引人深思的生动场景，其中<span class="template-slot">[主要动作]</span>。具体而言，<span class="template-slot">[细节或文字说明]</span>。虽然画面看似简单，其象征寓意却极为深刻：它深刻折射出了<span class="template-slot">[主题词]</span>，这一现象无可否认地值得我们深思。</div>
+        </div>
+
+        <!-- 英语二图表首段公式 -->
+        <div class="framework-block">
+          <div class="framework-header">
+            <span class="framework-title">📊 英语二·图表作文万能首段（走势/占比 + 极值对比）</span>
+            <button class="btn-copy-template" onclick="copyTemplate('g_p1_chart', this)">📋 复制公式</button>
+          </div>
+          <div class="template-en" id="g_p1_chart">As is clearly demonstrated in the chart, distinct changes have taken place regarding <span class="template-slot">[图表调查对象/主题]</span> during the past few years. To be more specific, the figure for <span class="template-slot">[主导项目/飙升指标]</span> witnessed a dramatic surge from <span class="template-slot">[数据A]</span> to <span class="template-slot">[数据B]</span>, taking the leading position. The conspicuous fluctuation has undeniably captured widespread public attention and triggered spirited discussions across society.</div>
+          <div class="template-cn"><strong>【中文对照】</strong>正如该图表所清晰展示，在过去几年中，关于<span class="template-slot">[调查主题]</span>发生了显著变化。具体而言，<span class="template-slot">[主导项目]</span>的数据见证了从<span class="template-slot">[数据A]</span>到<span class="template-slot">[数据B]</span>的急剧增长，牢牢占据主导地位。这一引人注目的波动无可否认地引起了公众的广泛关注，并在全社会引发了热烈探讨。</div>
+        </div>
+
+        <!-- 提示文字/名言首段公式 -->
+        <div class="framework-block">
+          <div class="framework-header">
+            <span class="framework-title">💬 文字提示 / 名言谚语作文万能首段</span>
+            <button class="btn-copy-template" onclick="copyTemplate('g_p1_quote', this)">📋 复制公式</button>
+          </div>
+          <div class="template-en" id="g_p1_quote">Recently, a well-known quote has gained wide currency: "<span class="template-slot">[名言/引语]</span>". This thought-provoking remark encapsulates a fundamental truth that <span class="template-slot">[名言揭示的核心哲理]</span>. Hence, it sheds light on the paramount significance of <span class="template-slot">[主题词]</span> in contemporary society.</div>
+          <div class="template-cn"><strong>【中文对照】</strong>最近，一句著名的格言广为人知：“<span class="template-slot">[名言引语]</span>”。这句引人深思的话蕴含着一个基本真理，即<span class="template-slot">[核心哲理]</span>。因此，它揭示了<span class="template-slot">[主题词]</span>在当代社会的极其重要性。</div>
+        </div>
+
+        <!-- 高频走势动词库 -->
+        <div style="margin-top:12px;">
+          <strong style="font-size:12.5px;color:var(--text);">💎 首段图表走势高频替换动词：</strong>
+          <div class="vocab-grid">
+            <span class="vocab-pill">witness a dramatic surge (急剧上升)</span>
+            <span class="vocab-pill">climb noticeably (显著攀升)</span>
+            <span class="vocab-pill">account for the lion's share (占最大份额)</span>
+            <span class="vocab-pill">take the leading position (稳居首位)</span>
+            <span class="vocab-pill">experience a slight decrease (略微下降)</span>
+            <span class="vocab-pill">capture widespread attention (引起广泛关注)</span>
+          </div>
+        </div>
       </div>
 
-      <div class="guide-card">
-        <h3>📱 手机添加到主屏幕指南 (PWA 离线使用)</h3>
-        <ul>
-          <li><strong>iPhone / iPad (Safari)</strong>：点击底部中间分享按钮 ➔ 选择<strong>「添加到主屏幕」</strong>，生成专属 App 图标！</li>
+      <!-- ================= PART 2: 第二段·7大核心主题深度论证与全篇模板 ================= -->
+
+      <!-- CARD: 主题一 经济腾飞与消费升级 -->
+      <div class="guide-card" data-guide-stage="p2" data-guide-cat="t1">
+        <div class="guide-card-header">
+          <h3>🛒 主题一：经济腾飞、消费升级与现代生活</h3>
+          <span class="guide-theme-badge">主题 1</span>
+        </div>
+        <div class="ideas-box">
+          <strong>🎯 第二段核心思路与论证脉络：</strong><br>
+          • <strong>宏观驱动</strong>：国民经济稳步高质量发展，居民人均可支配收入（<code>per capita disposable income</code>）与购买力显著提高；<br>
+          • <strong>观念转变</strong>：超越基本温饱，转向追求精神富足（<code>spiritual fulfillment</code>）、高品质与个性化体验；<br>
+          • <strong>数智赋能</strong>：完善的现代电商与物流网络（<code>modern logistics network</code>）极大降低交易成本、提升生活便利度。
+        </div>
+
+        <!-- 主题1 专属第一段 -->
+        <div class="theme-para-section">
+          <div class="theme-para-title">
+            <span class="para-badge">第一段·首段</span>
+            <span>本主题专属第一段引入模板</span>
+          </div>
+          <div class="framework-block">
+            <div class="framework-header">
+              <span class="framework-title">🎨 英一图画首段（消费热潮/网购/出行）</span>
+              <button class="btn-copy-template" onclick="copyTemplate('t1_p1_cart', this)">📋 复制首段</button>
+            </div>
+            <div class="template-en" id="t1_p1_cart">The drawing vividly portrays an everyday scene where <span class="template-slot">[消费场景，如: consumers are enthusiastically shopping online / travelers are flocking to tourist attractions]</span>. This vivid scene mirrors the booming prosperity of <span class="template-slot">[消费领域，如: modern cultural tourism / smart household consumption]</span>, an inspiring trend that reflects China's ever-improving living standards.</div>
+            <div class="template-cn"><strong>【中文对照】</strong>这幅图画生动描绘了一个日常场景，其中<span class="template-slot">[消费者在热衷网购/游客涌向文旅景点]</span>。这一生动画面折射出了<span class="template-slot">[文化旅游/智能家居消费]</span>的蓬勃发展，这一令人振奋的趋势反映了中国不断提升的生活水平。</div>
+          </div>
+          <div class="framework-block">
+            <div class="framework-header">
+              <span class="framework-title">📊 英二图表首段（消费数据激增/占比走势）</span>
+              <button class="btn-copy-template" onclick="copyTemplate('t1_p1_chart', this)">📋 复制首段</button>
+            </div>
+            <div class="template-en" id="t1_p1_chart">As is distinctly demonstrated in the chart, the past few years have witnessed dramatic changes regarding <span class="template-slot">[消费主题，如: residents' expenditure on new energy vehicles]</span>. Specifically, the figure registered a sharp rise from <span class="template-slot">[起点数据]</span> to <span class="template-slot">[终点数据]</span>, capturing widespread public interest.</div>
+            <div class="template-cn"><strong>【中文对照】</strong>正如该图表清晰所见，过去几年关于<span class="template-slot">[居民新能源车消费开支]</span>发生了显著变化。具体而言，该数据见证了从<span class="template-slot">[起点]</span>到<span class="template-slot">[终点]</span>的急剧增长，引发公众广泛兴趣。</div>
+          </div>
+        </div>
+
+        <!-- 主题1 第二段核心论证 -->
+        <div class="theme-para-section">
+          <div class="theme-para-title">
+            <span class="para-badge">第二段·正文</span>
+            <span>本主题第二段核心论证模板（正向 vs 反思）</span>
+          </div>
+          <div class="framework-block">
+            <div class="framework-header">
+              <span class="framework-title">🌟 框架 1（常规繁荣 / 消费升级与产业蓬勃型）</span>
+              <div style="display:flex;gap:6px;align-items:center;">
+                <span class="framework-tag tag-pos">正面促进</span>
+                <button class="btn-copy-template" onclick="copyTemplate('t1_p2_f1', this)">📋 复制二段框架1</button>
+              </div>
+            </div>
+            <div class="template-en" id="t1_p2_f1">A multitude of fundamental factors account for this noteworthy phenomenon. First and foremost, the primary driving force behind the surge in <span class="template-slot">[消费领域/主题词]</span> is the sustained vitality of our national economy, which has noticeably elevated citizens' disposable income and purchasing power. In the second place, modern individuals have undergone a profound shift in their consumption concept; instead of merely pursuing material subsistence, they now attach unprecedented value to spiritual fulfillment and personalized lifestyles. Last but not least, the rapid advancement of digital infrastructure and cutting-edge technologies has paved the way for convenient services, making it remarkably easier for consumers to access high-quality products.</div>
+            <div class="template-cn"><strong>【中文对照】</strong>诸多根本性因素促成了这一引人注目的现象。首先，推动<span class="template-slot">[主题词]</span>增长的首要动力是我国经济的持续生机与活力，这显著提升了普通民众的可支配收入与购买力。其次，现代人在消费观念上经历了深刻转变；他们不再仅仅追求温饱，而是对精神富足和个性化生活方式寄予了前所未有的重视。最后，数字化基础设施和前沿技术的飞速发展为便利服务铺平了道路，使消费者获取优质产品变得格外轻松。</div>
+          </div>
+          <div class="framework-block">
+            <div class="framework-header">
+              <span class="framework-title">⚠️ 框架 2（反思应对 / 理性消费与防范风险型）</span>
+              <div style="display:flex;gap:6px;align-items:center;">
+                <span class="framework-tag tag-ref">反思应对</span>
+                <button class="btn-copy-template" onclick="copyTemplate('t1_p2_f2', this)">📋 复制二段框架2</button>
+              </div>
+            </div>
+            <div class="template-en" id="t1_p2_f2">Behind the seemingly prosperous figures lies a series of underlying issues that warrant our deep reflection. On the one hand, aggressive algorithmic marketing and pervasive commercial advertisements have subtly fueled an irrational consumption atmosphere, inducing numerous youngsters to indulge in impulsive buying and excessive debt. On the other hand, a prevailing sense of vanity and peer pressure impels some individuals to mistake luxury possessions for personal worth, blindly chasing fashionable trends beyond their financial means. Were this unhealthy trend to continue unchecked, it would not only impose heavy economic burdens on households, but also erode youngsters' practical outlook on wealth and life.</div>
+            <div class="template-cn"><strong>【中文对照】</strong>在看似繁荣的数据背后，潜藏着一系列值得我们深思的深层问题。一方面，激进的算法营销与无孔不入的商业广告在潜移默化中助长了不理性的消费氛围，诱导众多年轻人沉溺于冲动消费和过度负债之中。另一方面，普遍存在的虚荣心与同辈压力迫使部分个体将奢侈品误认为个人价值，盲目追赶超出其经济承受能力的潮流风尚。倘若这种不良风气任其蔓延，不仅会给家庭带来沉重经济负担，更会侵蚀青年一代务实健康的财富观与人生观。</div>
+          </div>
+        </div>
+
+        <!-- 主题1 专属第三段 -->
+        <div class="theme-para-section">
+          <div class="theme-para-title">
+            <span class="para-badge">第三段·尾段</span>
+            <span>本主题专属第三段措施升华模板</span>
+          </div>
+          <div class="framework-block">
+            <div class="framework-header">
+              <span class="framework-title">🏆 尾段模板 1（倡导健康消费理念与美好生活）</span>
+              <button class="btn-copy-template" onclick="copyTemplate('t1_p3_f1', this)">📋 复制尾段1</button>
+            </div>
+            <div class="template-en" id="t1_p3_f1">From what has been analyzed above, the booming development of <span class="template-slot">[消费主题词]</span> represents an inevitable tide of modern life. Moving forward, authorities and market regulators should continue to optimize consumer environments and safeguard product safety. Simultaneously, the public should embrace a rational and green consumption philosophy. Only in this way can we sustain this economic momentum and build a more fulfilling society.</div>
+            <div class="template-cn"><strong>【中文对照】</strong>综上分析，<span class="template-slot">[消费主题词]</span>的蓬勃发展代表了现代生活的必然潮流。展望未来，相关部门与市场监管方应继续优化消费环境、守护产品安全。同时，公众应树立理性、绿色的消费理念。唯有如此，我们方能维系这一经济势头，共创更富足充实的美好社会。</div>
+          </div>
+          <div class="framework-block">
+            <div class="framework-header">
+              <span class="framework-title">⚖️ 尾段模板 2（规范信贷营销与树立务实财富观）</span>
+              <button class="btn-copy-template" onclick="copyTemplate('t1_p3_f2', this)">📋 复制尾段2</button>
+            </div>
+            <div class="template-en" id="t1_p3_f2">To curb irrational spending and financial risks, concerted efforts must be undertaken promptly. For one thing, stricter laws should be enacted to regulate aggressive credit promotions and commercial gimmicks. For another, schools and families ought to guide young individuals to cultivate a pragmatic outlook on money and spend within their means.</div>
+            <div class="template-cn"><strong>【中文对照】</strong>为遏制非理性消费和金融风险，全社会必须迅速协同行动。一方面，应出台更严格的法律来规范激进的借贷营销与商业噱头；另一方面，学校和家庭应当引导青年群体树立务实的金钱观，做到量入为出。</div>
+          </div>
+        </div>
+
+        <!-- 词汇库 -->
+        <div style="margin-top:12px;">
+          <strong style="font-size:12.5px;color:var(--text);">💎 提分高频词汇推荐：</strong>
+          <div class="vocab-grid">
+            <span class="vocab-pill">per capita disposable income (人均可支配收入)</span>
+            <span class="vocab-pill">consumption upgrading (消费升级)</span>
+            <span class="vocab-pill">spiritual fulfillment (精神富足)</span>
+            <span class="vocab-pill">impulsive buying (冲动消费)</span>
+            <span class="vocab-pill">pave the way for (为…铺平道路)</span>
+            <span class="vocab-pill">spend within one's means (量入为出)</span>
+          </div>
+        </div>
+
+        <!-- 真题套用 -->
+        <div class="case-toggle" onclick="toggleCaseContent('case_t1')">
+          <span>🎯 历年真题实战套用示范 (点击展开 2024英二/2023英二) ▼</span>
+        </div>
+        <div class="case-content" id="case_t1">
+          • <strong>2024年英语二（新能源汽车普及率持续攀升）</strong>：首段套用<strong>图表首段模板</strong>，二段套用<strong>框架1</strong>，将主题词替换为 <code>the rapid adoption of new energy vehicles</code>；首因归因于国家绿色补贴与居民可支配收入增长，次因归因于绿色低碳出行意识提升。尾段套用<strong>尾段模板1</strong>。<br>
+          • <strong>2023年英语二（居民健康养生开支上升）</strong>：二段套用<strong>框架1</strong>，填入 <code>health and wellness expenditure</code>，归因于收入提升与后疫情时代公众强身防病观念的深刻升级。
+        </div>
+      </div>
+
+      <!-- CARD: 主题二 正面品质与个人成长 -->
+      <div class="guide-card" data-guide-stage="p2" data-guide-cat="t2">
+        <div class="guide-card-header">
+          <h3>🏔️ 主题二：正面品质、坚毅笃行与个人成长</h3>
+          <span class="guide-theme-badge">主题 2</span>
+        </div>
+        <div class="ideas-box">
+          <strong>🎯 第二段核心思路与论证脉络：</strong><br>
+          • <strong>破局利器</strong>：人生充满荆棘与挫折，唯有百折不挠的坚毅品质（<code>unyielding fortitude / perseverance</code>）是战胜逆境的内驱力；<br>
+          • <strong>成就基石</strong>：一切辉煌成就与重大突破，皆源自日复一日的汗水积累与脚踏实地，绝无捷径可言；<br>
+          • <strong>社会基石</strong>：自律、诚信与团队协作，是现代公民的核心素养与社会良性运作的润滑剂。
+        </div>
+
+        <!-- 主题2 专属第一段 -->
+        <div class="theme-para-section">
+          <div class="theme-para-title">
+            <span class="para-badge">第一段·首段</span>
+            <span>本主题专属第一段引入模板</span>
+          </div>
+          <div class="framework-block">
+            <div class="framework-header">
+              <span class="framework-title">🎨 英一图画首段（攀登/长跑/直面逆境）</span>
+              <button class="btn-copy-template" onclick="copyTemplate('t2_p1_cart', this)">📋 复制首段</button>
+            </div>
+            <div class="template-en" id="t2_p1_cart">The drawing vividly presents an inspiring image in which <span class="template-slot">[人物动作，如: two individuals are braving hardships to climb a steep mountain / athletes are persevering in a boat race]</span>. Simple as the scene appears, it conveys a profound truth that <span class="template-slot">[核心品质，如: unyielding perseverance / teamwork]</span> is the very key to overcoming adversity and achieving triumph.</div>
+            <div class="template-cn"><strong>【中文对照】</strong>这幅图画生动展现了一个激励人心的画面，其中<span class="template-slot">[两个人正顶着艰难险阻攀登险峰/龙舟队员奋力拼搏]</span>。画面虽看似简单，却传达了一个深刻真理：<span class="template-slot">[坚韧不拔的毅力/团队协作]</span>正是战胜逆境、赢得胜利的关键所在。</div>
+          </div>
+        </div>
+
+        <!-- 主题2 第二段论证 -->
+        <div class="theme-para-section">
+          <div class="theme-para-title">
+            <span class="para-badge">第二段·正文</span>
+            <span>本主题第二段核心论证模板（磨砺卓越 vs 戒骄戒躁）</span>
+          </div>
+          <div class="framework-block">
+            <div class="framework-header">
+              <span class="framework-title">🌟 框架 1（意志磨砺 / 拼搏进取铸就卓越型）</span>
+              <div style="display:flex;gap:6px;align-items:center;">
+                <span class="framework-tag tag-pos">正面砥砺</span>
+                <button class="btn-copy-template" onclick="copyTemplate('t2_p2_f1', this)">📋 复制二段框架1</button>
+              </div>
+            </div>
+            <div class="template-en" id="t2_p2_f1">The profound truth conveyed by this picture can be interpreted from several compelling perspectives. To begin with, <span class="template-slot">[核心品质名词]</span> serves as an indispensable cornerstone for any individual striving for personal growth and excellence. When confronted with thorny dilemmas and unexpected obstacles on the journey of life, it is this unyielding fortitude that empowers us to hold out to the end and turn crises into opportunities. Furthermore, history abounds with glorious examples where visionary pioneers achieved extraordinary feats precisely because they remained dedicated to their lofty ideals in spite of hardships. Without this noble trait, even the most gifted talent would eventually succumb to frustration and achieve nothing.</div>
+            <div class="template-cn"><strong>【中文对照】</strong>这幅图画所传递的深刻哲理可以从几个令人信服的视角来解读。首先，<span class="template-slot">[核心品质]</span>是任何渴望个人成长与卓越的人不可或缺的基石。在人生旅途中面对棘手困境和突如其来的障碍时，正是这种百折不挠的刚毅品质赋予了我们坚持到底、化危机为转机的力量。此外，历史上充满了光辉范例，有远见的先驱们之所以能建立非凡功业，恰恰是因为他们在困苦面前始终坚守崇高理想。倘若缺少这种崇高品格，即便是天资最聪颖之人最终也会屈服于挫折而一事无成。</div>
+          </div>
+          <div class="framework-block">
+            <div class="framework-header">
+              <span class="framework-title">⚠️ 框架 2（反面警示 / 戒骄戒躁与摒弃浮躁型）</span>
+              <div style="display:flex;gap:6px;align-items:center;">
+                <span class="framework-tag tag-ref">反面针砭</span>
+                <button class="btn-copy-template" onclick="copyTemplate('t2_p2_f2', this)">📋 复制二段框架2</button>
+              </div>
+            </div>
+            <div class="template-en" id="t2_p2_f2">The distressing scenario in the drawing functions as a sharp critique of a prevailing yet detrimental mindset in modern society. For one thing, driven by impetuous utilitarianism and the illusion of overnight success, a great number of people are increasingly prone to give up halfway whenever initial excitement fades or minor setbacks arise. For another, the lack of <span class="template-slot">[缺失品质]</span> blinds them to the universal rule that genuine competence requires long-term accumulation rather than opportunistic shortcuts. If this shortsighted orientation continues to spread, it will not only stifle individuals' potential, but also poison our social atmosphere with deceit and superficiality.</div>
+            <div class="template-cn"><strong>【中文对照】</strong>图中令人忧心的场景，是对现代社会中一种普遍却有害的心态的尖锐针砭。一方面，在急功近利的实用主义和一夜成名的幻想驱使下，许多人在最初的新鲜感消退或遇到微小挫折时，便极易半途而废。另一方面，<span class="template-slot">[核心品质]</span>的缺失使他们忽视了一条普遍规律：真正的本领来自于长期的积累，而非投机取巧的捷径。如果这种短视的导向继续蔓延，它不仅会扼杀个体的潜能，更会用欺瞒与浮躁毒化我们的社会风气。</div>
+          </div>
+        </div>
+
+        <!-- 主题2 专属第三段 -->
+        <div class="theme-para-section">
+          <div class="theme-para-title">
+            <span class="para-badge">第三段·尾段</span>
+            <span>本主题专属第三段措施升华模板</span>
+          </div>
+          <div class="framework-block">
+            <div class="framework-header">
+              <span class="framework-title">🏆 尾段模板 1（弘扬拼搏精神与青年砥砺前行）</span>
+              <button class="btn-copy-template" onclick="copyTemplate('t2_p3_f1', this)">📋 复制尾段1</button>
+            </div>
+            <div class="template-en" id="t2_p3_f1">Taking all these factors into consideration, we may safely arrive at the conclusion that <span class="template-slot">[核心品质]</span> is the prime engine driving personal growth and civil progress. As contemporary college students, we should foster this invaluable virtue, facing hurdles with courage and resilience. Only when we stay true to our original aspiration can we realize self-value and create a brighter future.</div>
+            <div class="template-cn"><strong>【中文对照】</strong>综合考虑所有因素，我们可以有把握地得出结论：<span class="template-slot">[核心品质]</span>是驱动个人成长与文明进步的核心引擎。作为当代大学生，我们应当培养这种宝贵美德，以勇气和坚韧直面困难。唯有坚守初心，我们才能实现自我价值、开创更加美好的未来。</div>
+          </div>
+        </div>
+
+        <!-- 词汇库 -->
+        <div style="margin-top:12px;">
+          <strong style="font-size:12.5px;color:var(--text);">💎 提分高频词汇推荐：</strong>
+          <div class="vocab-grid">
+            <span class="vocab-pill">unyielding fortitude (百折不挠的刚毅)</span>
+            <span class="vocab-pill">indispensable cornerstone (不可或缺的基石)</span>
+            <span class="vocab-pill">down-to-earth dedication (脚踏实地的奉献)</span>
+            <span class="vocab-pill">impetuous utilitarianism (急功近利的实用主义)</span>
+            <span class="vocab-pill">opportunistic shortcuts (投机取巧的捷径)</span>
+            <span class="vocab-pill">stay true to original aspiration (坚守初心)</span>
+          </div>
+        </div>
+
+        <!-- 真题套用 -->
+        <div class="case-toggle" onclick="toggleCaseContent('case_t2')">
+          <span>🎯 历年真题实战套用示范 (点击展开 2023英一/2018英一) ▼</span>
+        </div>
+        <div class="case-content" id="case_t2">
+          • <strong>2023年英语一（龙舟竞渡奋楫争先）</strong>：首段套用<strong>图画首段模板</strong>，二段套用<strong>框架1</strong>，填入 <code>perseverance and solidarity (顽强坚持与团结协作)</code>，尾段套用<strong>尾段模板1</strong>。<br>
+          • <strong>2018年英语一（大学生选课：脚踏实地 vs 轻松混学分）</strong>：二段套用<strong>框架2</strong>，将缺失品质填入 <code>academic conscientiousness (严谨求实学风)</code>，针砭功利浮躁作风。
+        </div>
+      </div>
+
+      <!-- CARD: 主题三 教育实践与青年抉择 -->
+      <div class="guide-card" data-guide-stage="p2" data-guide-cat="t3">
+        <div class="guide-card-header">
+          <h3>🎓 主题三：教育实践、校园成长与青年抉择</h3>
+          <span class="guide-theme-badge">主题 3</span>
+        </div>
+        <div class="ideas-box">
+          <strong>🎯 第二段核心思路与论证脉络：</strong><br>
+          • <strong>知行合一</strong>：纸上得来终觉浅，实践（<code>hands-on practice</code>）是检验理论与检验真理的唯一标准，弥合学校教育与社会需求落差；<br>
+          • <strong>复合素质</strong>：现代就业市场竞争激烈，要求青年具备批判性思维（<code>critical thinking</code>）与人际协作的复合能力；<br>
+          • <strong>规划清醒</strong>：破除盲从跟风与考证内卷，立足自身优势做理性的长远人生规划。
+        </div>
+
+        <!-- 主题3 专属第一段 -->
+        <div class="theme-para-section">
+          <div class="theme-para-title">
+            <span class="para-badge">第一段·首段</span>
+            <span>本主题专属第一段引入模板</span>
+          </div>
+          <div class="framework-block">
+            <div class="framework-header">
+              <span class="framework-title">📊 英二图表/英一图画首段（青年求学/考研就业/阅读）</span>
+              <button class="btn-copy-template" onclick="copyTemplate('t3_p1_temp', this)">📋 复制首段</button>
+            </div>
+            <div class="template-en" id="t3_p1_temp">The chart/drawing clearly reflects the choices and development of contemporary university graduates concerning <span class="template-slot">[主题，如: post-graduation choices / voluntary social practice]</span>. Specifically, <span class="template-slot">[关键数据或动作描摹]</span>. This noteworthy phenomenon triggers deep contemplation on higher education and youth development.</div>
+            <div class="template-cn"><strong>【中文对照】</strong>该图表/图画清晰反映了当代大学毕业生在<span class="template-slot">[毕业去向选择/志愿社会实践]</span>方面的抉择与发展。具体而言，<span class="template-slot">[数据或动作描摹]</span>。这一引人注目的现象引发了关于高等教育与青年发展的深层思索。</div>
+          </div>
+        </div>
+
+        <!-- 主题3 第二段论证 -->
+        <div class="theme-para-section">
+          <div class="theme-para-title">
+            <span class="para-badge">第二段·正文</span>
+            <span>本主题第二段核心论证模板（知行合一 vs 破除内卷）</span>
+          </div>
+          <div class="framework-block">
+            <div class="framework-header">
+              <span class="framework-title">🌟 框架 1（知行合一 / 自我增能与综合赋能型）</span>
+              <div style="display:flex;gap:6px;align-items:center;">
+                <span class="framework-tag tag-pos">实践赋能</span>
+                <button class="btn-copy-template" onclick="copyTemplate('t3_p2_f1', this)">📋 复制二段框架1</button>
+              </div>
+            </div>
+            <div class="template-en" id="t3_p2_f1">This striking phenomenon clearly reflects the evolving educational paradigm and youth aspirations in contemporary China. In the first place, with the rapid restructuring of modern industries, contemporary college students are acutely aware that mere textbook knowledge is no longer sufficient; instead, <span class="template-slot">[主题行为/实践学习]</span> is critically needed to bridge the gap between abstract theories and real-world application. In the second place, engaging in such constructive pursuits substantially equips youngsters with comprehensive competence, ranging from critical thinking to interpersonal collaboration. Consequently, this forward-looking choice directly enhances their core competitiveness in an increasingly demanding employment market.</div>
+            <div class="template-cn"><strong>【中文对照】</strong>这一引人注目的现象清晰反映了当代中国不断演进的教育范式和青年志向。首先，随着现代产业结构的快速调整，当代大学生敏锐地意识到仅有书本知识已远远不够；相反，迫切需要通过<span class="template-slot">[主题行为]</span>来弥合抽象理论与实际应用之间的鸿沟。其次，投身于这些建设性的追求，极大地培养了青年的综合素质，涵盖从批判性思维到人际协作的诸多维度。因此，这种具有前瞻性的选择直接提升了他们在竞争日益激烈的就业市场中的核心竞争力。</div>
+          </div>
+          <div class="framework-block">
+            <div class="framework-header">
+              <span class="framework-title">⚠️ 框架 2（迷茫盲从 / 破除内卷与理性规划型）</span>
+              <div style="display:flex;gap:6px;align-items:center;">
+                <span class="framework-tag tag-ref">理性规划</span>
+                <button class="btn-copy-template" onclick="copyTemplate('t3_p2_f2', this)">📋 复制二段框架2</button>
+              </div>
+            </div>
+            <div class="template-en" id="t3_p2_f2">The striking figures disclose an underlying psychological anxiety shared by millions of university graduates. Primary among the causes is the herd mentality; lacking a clear perception of their genuine strengths and career aspirations, countless young individuals unthinkingly follow the crowd into <span class="template-slot">[盲目行为]</span>. Furthermore, excessive societal involution and the unrealistic worship of prestigious credentials have distorted the intrinsic purpose of higher education, leading many to treat exam credentials as a safe haven to postpone career responsibilities. Such an unguided rush inevitably leads to a tremendous waste of valuable educational resources and personal youth.</div>
+            <div class="template-cn"><strong>【中文对照】</strong>这些醒目的数据揭示了数百万大学毕业生普遍存在的深层心理焦虑。首要原因在于从众心理；无数年轻个体对自己的真实优势和职业志向缺乏清晰认知，未经深思便盲目跟风涌入<span class="template-slot">[盲目行为]</span>。此外，过度的社会内卷以及对名校文凭的非理性崇拜扭曲了高等教育的内在初衷，导致许多人将考试文凭视作逃避职业责任的避风港。这种缺乏引导的盲目蜂拥，势必会导致宝贵教育资源和个人青春的巨大浪费。</div>
+          </div>
+        </div>
+
+        <!-- 主题3 专属第三段 -->
+        <div class="theme-para-section">
+          <div class="theme-para-title">
+            <span class="para-badge">第三段·尾段</span>
+            <span>本主题专属第三段措施升华模板</span>
+          </div>
+          <div class="framework-block">
+            <div class="framework-header">
+              <span class="framework-title">🏆 尾段模板 1（高校强化实践育人与青年明确长远规划）</span>
+              <button class="btn-copy-template" onclick="copyTemplate('t3_p3_f1', this)">📋 复制尾段1</button>
+            </div>
+            <div class="template-en" id="t3_p3_f1">In summary, youth development requires both educational institutional support and personal sensible planning. Colleges should offer tailored career guidance and abundant internship platforms to enrich students' practical capabilities. Meanwhile, students themselves must shun blind conformity, making well-informed decisions that match their talents.</div>
+            <div class="template-cn"><strong>【中文对照】</strong>总之，青年人的发展既需要教育制度的支持，也需要个人明智的规划。高校应当提供定制化的职业规划指导与丰富的实习平台，以提升学生的实践能力。与此同时，学生自身也必须摒弃盲从，做出符合自身特长与天赋的明智抉择。</div>
+          </div>
+        </div>
+
+        <!-- 词汇库 -->
+        <div style="margin-top:12px;">
+          <strong style="font-size:12.5px;color:var(--text);">💎 提分高频词汇推荐：</strong>
+          <div class="vocab-grid">
+            <span class="vocab-pill">bridge the gap (弥合鸿沟)</span>
+            <span class="vocab-pill">hands-on social practice (实操社会实践)</span>
+            <span class="vocab-pill">core competitiveness (核心竞争力)</span>
+            <span class="vocab-pill">herd mentality (从众羊群效应)</span>
+            <span class="vocab-pill">societal involution (社会内卷)</span>
+            <span class="vocab-pill">well-informed decisions (明智的抉择)</span>
+          </div>
+        </div>
+
+        <!-- 真题套用 -->
+        <div class="case-toggle" onclick="toggleCaseContent('case_t3')">
+          <span>🎯 历年真题实战套用示范 (点击展开 2019英二/2013英一) ▼</span>
+        </div>
+        <div class="case-content" id="case_t3">
+          • <strong>2019年英语二（高校毕业生去向选择：升学 vs 就业）</strong>：二段套用<strong>框架1</strong>，论述读研升学是为了通过深造获取前沿学术知识、提高复合竞争力。<br>
+          • <strong>2013年英语一（毕业生找工作：十字路口的彷徨）</strong>：二段套用<strong>框架2</strong>，分析青年缺乏自我定位、盲目从众的困境。
+        </div>
+      </div>
+
+      <!-- CARD: 主题四 文化传承与文化自信 -->
+      <div class="guide-card" data-guide-stage="p2" data-guide-cat="t4">
+        <div class="guide-card-header">
+          <h3>🎭 主题四：文化传承、文明互鉴与文化自信</h3>
+          <span class="guide-theme-badge">主题 4</span>
+        </div>
+        <div class="ideas-box">
+          <strong>🎯 第二段核心思路与论证脉络：</strong><br>
+          • <strong>精神根脉</strong>：中华优秀传统文化积淀着民族最深沉的精神追求，提供深厚的归属感与身份认同（<code>cultural identity & emotional belonging</code>）；<br>
+          • <strong>守正创新</strong>：非遗国潮借助现代美学、文创IP与数字新媒介，实现“破圈出彩”，焕发新活力；<br>
+          • <strong>文明互鉴</strong>：坚定文化自信的同时，秉持包容开放态度，促进不同文明交流对话、和合共生。
+        </div>
+
+        <!-- 主题4 专属第一段 -->
+        <div class="theme-para-section">
+          <div class="theme-para-title">
+            <span class="para-badge">第一段·首段</span>
+            <span>本主题专属第一段引入模板</span>
+          </div>
+          <div class="framework-block">
+            <div class="framework-header">
+              <span class="framework-title">🎨 英一图画首段（戏曲/汉服/非遗进校园/中外文化）</span>
+              <button class="btn-copy-template" onclick="copyTemplate('t4_p1_cart', this)">📋 复制首段</button>
+            </div>
+            <div class="template-en" id="t4_p1_cart">The drawing vividly showcases an attractive cultural scene in which <span class="template-slot">[文化场景，如: students dressed in traditional Hanfu are admiring intangible heritage crafts]</span>. This eye-catching scene bears eloquent testimony to the revival of <span class="template-slot">[文化主题，如: traditional Chinese culture]</span>, demonstrating our ever-stronger cultural self-confidence.</div>
+            <div class="template-cn"><strong>【中文对照】</strong>这幅图画生动展现了一个引人入胜的文化场景，其中<span class="template-slot">[身着汉服的学生正在欣赏非遗手工艺品]</span>。这一醒目的画面充分证明了<span class="template-slot">[中华传统文化]</span>的伟大复兴，展现了我们日益坚定的文化自信。</div>
+          </div>
+        </div>
+
+        <!-- 主题4 第二段论证 -->
+        <div class="theme-para-section">
+          <div class="theme-para-title">
+            <span class="para-badge">第二段·正文</span>
+            <span>本主题第二段核心论证模板（守正创新 vs 保护精髓）</span>
+          </div>
+          <div class="framework-block">
+            <div class="framework-header">
+              <span class="framework-title">🌟 框架 1（守正创新 / 增强自信与文化繁荣型）</span>
+              <div style="display:flex;gap:6px;align-items:center;">
+                <span class="framework-tag tag-pos">守正创新</span>
+                <button class="btn-copy-template" onclick="copyTemplate('t4_p2_f1', this)">📋 复制二段框架1</button>
+              </div>
+            </div>
+            <div class="template-en" id="t4_p2_f1">The growing prominence of this phenomenon speaks volumes about our profound cultural resurgence and confidence. Above all, traditional Chinese culture constitutes the spiritual root and lifeblood of our nation; reviving <span class="template-slot">[文化主题词]</span> fulfills citizens' inherent longing for cultural belonging and emotional resonance. What is more, modern creators have embraced the concept of innovative transformation, ingeniously integrating ancient cultural symbols with contemporary aesthetic tastes and digital media. Consequently, traditional treasures are no longer gathering dust in museums, but actively breathing fresh vitality into people's everyday lives and proudly presenting Chinese charm to the global community.</div>
+            <div class="template-cn"><strong>【中文对照】</strong>这一现象的日益瞩目，充分彰显了我国深厚的文化复兴与文化自信。首先，中华优秀传统文化构成了我们民族的精神根基与血脉命脉；复兴<span class="template-slot">[文化主题]</span>满足了普通民众对文化归属感与情感共鸣的内在渴求。更重要的是，当代创作者积极践行创新性转化理念，巧妙地将古老文化符号与现代审美趣味、数字媒介深度交融。因此，传统文化瑰宝不再仅仅在博物馆中落满灰尘，而是在人们的日常生活中焕发蓬勃生机，并自豪地向全球社会展现中华魅力。</div>
+          </div>
+          <div class="framework-block">
+            <div class="framework-header">
+              <span class="framework-title">⚠️ 框架 2（防范过度商业化 / 守护精髓与流失警示型）</span>
+              <div style="display:flex;gap:6px;align-items:center;">
+                <span class="framework-tag tag-ref">守护根脉</span>
+                <button class="btn-copy-template" onclick="copyTemplate('t4_p2_f2', this)">📋 复制二段框架2</button>
+              </div>
+            </div>
+            <div class="template-en" id="t4_p2_f2">While cultural industries appear to be booming on the surface, this scenario soundly exposes an alarming trend of cultural alienation. For one thing, driven by sheer commercial greed, an increasing number of developers excessively package <span class="template-slot">[文化瑰宝]</span> into shallow tourist gimmicks, thereby stripping away their authentic spiritual essence. For another, the prevailing tide of fast-food entertainment and instant gratification has distracted the public from savoring the profound connotations of cultural classics. Should we fail to preserve the purity and solemnity of our cultural roots, we risk turning priceless civilizational legacies into empty commercial shells.</div>
+            <div class="template-cn"><strong>【中文对照】</strong>尽管文化产业表面上似乎蓬勃发展，但这幅画面却深刻揭露了文化异化的令人警觉的倾向。一方面，在纯粹商业利益的驱使下，越来越多的开发者过度将<span class="template-slot">[文化瑰宝]</span>包装成浅薄的旅游噱头，从而剥离了其原本真实的文化精神内核。另一方面，快餐化娱乐和即时满足的普遍浪潮，使得公众难以静心品味文化经典的深刻内涵。倘若我们未能守护住文化根脉的纯洁与庄严，我们终将面临让弥足珍贵的名胜文明遗产沦为毫无灵魂的商业空壳的风险。</div>
+          </div>
+        </div>
+
+        <!-- 主题4 专属第三段 -->
+        <div class="theme-para-section">
+          <div class="theme-para-title">
+            <span class="para-badge">第三段·尾段</span>
+            <span>本主题专属第三段措施升华模板</span>
+          </div>
+          <div class="framework-block">
+            <div class="framework-header">
+              <span class="framework-title">🏆 尾段模板 1（传承中华文脉与促进文明互鉴）</span>
+              <button class="btn-copy-template" onclick="copyTemplate('t4_p3_f1', this)">📋 复制尾段1</button>
+            </div>
+            <div class="template-en" id="t4_p3_f1">In light of the discussion above, safeguarding and rejuvenating <span class="template-slot">[文化瑰宝]</span> is our historical mission. It is imperative that cultural institutions utilize modern technologies to innovate cultural delivery. Furthermore, contemporary youths should act as cultural ambassadors, carrying forward traditional heritage while welcoming foreign cultures with an open and inclusive mindset.</div>
+            <div class="template-cn"><strong>【中文对照】</strong>鉴于上述讨论，守护并复兴<span class="template-slot">[文化瑰宝]</span>是我们肩负的历史使命。文化机构务必善用现代科技创新文化传播形式。此外，当代青年应当争当文化使者，在传承弘扬传统精粹的同时，以开放包容的心态拥抱外来优秀文化。</div>
+          </div>
+        </div>
+
+        <!-- 词汇库 -->
+        <div style="margin-top:12px;">
+          <strong style="font-size:12.5px;color:var(--text);">💎 提分高频词汇推荐：</strong>
+          <div class="vocab-grid">
+            <span class="vocab-pill">cultural resurgence (文化复兴)</span>
+            <span class="vocab-pill">spiritual root and lifeblood (精神根基与血脉)</span>
+            <span class="vocab-pill">innovative transformation (创新性转化)</span>
+            <span class="vocab-pill">breathe fresh vitality into (赋予新生机)</span>
+            <span class="vocab-pill">cultural ambassadors (文化使者)</span>
+            <span class="vocab-pill">inclusive mindset (包容开放心态)</span>
+          </div>
+        </div>
+
+        <!-- 真题套用 -->
+        <div class="case-toggle" onclick="toggleCaseContent('case_t4')">
+          <span>🎯 历年真题实战套用示范 (点击展开 2022英一/2010英一) ▼</span>
+        </div>
+        <div class="case-content" id="case_t4">
+          • <strong>2022年英语一（传统戏曲与汉服进校园）</strong>：首段套用<strong>专属图画首段</strong>，二段套用<strong>框架1</strong>，将文化主题词代入 <code>traditional operas and Hanfu costume</code>，尾段套用<strong>专属尾段1</strong>。<br>
+          • <strong>2010年英语一（文化火锅 / 中外文化包容互鉴）</strong>：二段套用<strong>框架1</strong>，论述中华文化海纳百川（<code>openness and inclusiveness</code>），在吸收世界优秀文明成果中展现强大生命力。
+        </div>
+      </div>
+
+      <!-- CARD: 主题五 体育健身与身心健康 -->
+      <div class="guide-card" data-guide-stage="p2" data-guide-cat="t5">
+        <div class="guide-card-header">
+          <h3>🏃 主题五：体育健身、身心平衡与健康素养</h3>
+          <span class="guide-theme-badge">2026真题重点</span>
+        </div>
+        <div class="ideas-box">
+          <strong>🎯 第二段核心思路与论证脉络：</strong><br>
+          • <strong>体魄基石</strong>：身体是奋斗的本钱，强健的体格（<code>vigorous physique</code>）是应对繁重学习与工作挑战的基础；<br>
+          • <strong>心理疗愈</strong>：快节奏现代生活中，体育锻炼分泌内啡肽与多巴胺，是摆脱精神内耗与焦虑（<code>antidote to mental burnout</code>）的最佳途径；<br>
+          • <strong>健康中国</strong>：2026年最新真题聚焦儿童与全民健康，全民健身设施完备与户外运动成为社会新风尚。
+        </div>
+
+        <!-- 主题5 专属第一段 -->
+        <div class="theme-para-section">
+          <div class="theme-para-title">
+            <span class="para-badge">第一段·首段</span>
+            <span>本主题专属第一段引入模板 (适配2026英二儿童户外活动真题)</span>
+          </div>
+          <div class="framework-block">
+            <div class="framework-header">
+              <span class="framework-title">📊 英二图表首段（体育锻炼/儿童户外活动调查）</span>
+              <button class="btn-copy-template" onclick="copyTemplate('t5_p1_chart', this)">📋 复制首段</button>
+            </div>
+            <div class="template-en" id="t5_p1_chart">As is clearly shown in the chart, remarkable progress has been registered regarding <span class="template-slot">[主题，如: children's participation in outdoor physical activities]</span> in recent years. In particular, the proportion has soared significantly from <span class="template-slot">[起点]</span> to <span class="template-slot">[终点]</span>, attracting widespread public approval.</div>
+            <div class="template-cn"><strong>【中文对照】</strong>正如该图表清晰所示，近年来在<span class="template-slot">[儿童参与户外体育活动]</span>方面取得了显著进展。特别是该比例从<span class="template-slot">[起点]</span>大幅跃升至<span class="template-slot">[终点]</span>，赢得了公众的广泛赞许。</div>
+          </div>
+        </div>
+
+        <!-- 主题5 第二段论证 -->
+        <div class="theme-para-section">
+          <div class="theme-para-title">
+            <span class="para-badge">第二段·正文</span>
+            <span>本主题第二段核心论证模板（体育赋能 vs 亚健康警示）</span>
+          </div>
+          <div class="framework-block">
+            <div class="framework-header">
+              <span class="framework-title">🌟 框架 1（全民强健 / 体育赋能与健康生活型）</span>
+              <div style="display:flex;gap:6px;align-items:center;">
+                <span class="framework-tag tag-pos">全民强健</span>
+                <button class="btn-copy-template" onclick="copyTemplate('t5_p2_f1', this)">📋 复制二段框架1</button>
+              </div>
+            </div>
+            <div class="template-en" id="t5_p2_f1">This welcome change can be primarily attributed to the awakening of health consciousness among modern citizens. First and foremost, under the immense pressure of fast-paced urban routines, people have come to realize that regular physical exercise, such as <span class="template-slot">[运动形式]</span>, serves as the most effective antidote to alleviate stress and refresh their minds. In addition, the proactive implementation of the National Fitness Strategy has greatly improved grassroots sports facilities, providing accessible and safe playgrounds for individuals of all ages. Embracing an active lifestyle not only builds up a vigorous physique, but also tempers an unbending character characterized by tenacity and teamwork.</div>
+            <div class="template-cn"><strong>【中文对照】</strong>这种令人欣喜的转变，主要归功于现代公民健康意识的觉醒。首先，在快节奏都市日常的重重压力之下，人们已经深刻意识到，经常参与体育锻炼（例如<span class="template-slot">[运动形式]</span>）是缓解压力、焕发精神的最有效解药。此外，“全民健身”国家战略的积极落实极大地完善了基层体育基础设施，为全年龄段人群提供了便捷安全的运动场地。拥抱积极的生活方式不仅能铸就强健的体魄，更能磨砺出兼具顽强意志与团队精神的坚韧品格。</div>
+          </div>
+          <div class="framework-block">
+            <div class="framework-header">
+              <span class="framework-title">⚠️ 框架 2（亚健康警示 / 破解屏幕沉迷与久坐隐忧型）</span>
+              <div style="display:flex;gap:6px;align-items:center;">
+                <span class="framework-tag tag-ref">亚健康警示</span>
+                <button class="btn-copy-template" onclick="copyTemplate('t5_p2_f2', this)">📋 复制二段框架2</button>
+              </div>
+            </div>
+            <div class="template-en" id="t5_p2_f2">This thought-provoking image brings to light a grave health crisis that is silently imperiling our younger generation. Foremost among the catalysts is the proliferation of digital devices; captive to dazzling virtual entertainment and short video feeds, millions of teenagers spend excessive sedentary hours indoors, neglecting outdoor physical exercise. Meanwhile, the overwhelming academic load and parents' overprotective attitude have further squeezed out children's leisure time for nature exploration. If this trend of physical inactivity is left unchecked, it will not only trigger a sharp decline in physical fitness, but also breed psychological vulnerability and social alienation among the youth.</div>
+            <div class="template-cn"><strong>【中文对照】</strong>这幅引人深思的图画揭示了一场正在悄然威胁年轻一代的严重健康危机。首要诱因在于数字电子设备的普及泛滥；受制于炫目的虚拟娱乐和短视频推送，数以百万计的青少年在室内长时间久坐不动，忽视了户外体育锻炼。与此同时，沉重的课业负担和家长的过度保护倾向，进一步挤占了孩子们走向自然探索的闲暇时光。倘若这种缺乏运动的趋势得不到遏制，它不仅会导致体质的急剧滑坡，更会在青年群体中滋生心理脆弱与社交疏离。</div>
+          </div>
+        </div>
+
+        <!-- 主题5 专属第三段 -->
+        <div class="theme-para-section">
+          <div class="theme-para-title">
+            <span class="para-badge">第三段·尾段</span>
+            <span>本主题专属第三段措施升华模板</span>
+          </div>
+          <div class="framework-block">
+            <div class="framework-header">
+              <span class="framework-title">🏆 尾段模板 1（落实全民健康与引导青少年走到户外）</span>
+              <button class="btn-copy-template" onclick="copyTemplate('t5_p3_f1', this)">📋 复制尾段1</button>
+            </div>
+            <div class="template-en" id="t5_p3_f1">To conclude, sports and physical wellness form the cornerstone of personal happiness and national vigor. Schools and parents should actively encourage youngsters to step out of classrooms and embrace nature. Concurrently, communities should construct more accessible sports amenities. Only with sound minds in sound bodies can our younger generation shoulders historical responsibilities.</div>
+            <div class="template-cn"><strong>【中文对照】</strong>总而言之，体育锻炼与身体健康构成了个人幸福与国家活力的基石。学校与家长应积极鼓励青少年走出教室、拥抱大自然。同时，社区应建造更多普惠便利的运动设施。唯有拥有健康健全的体魄与心智，我们的年轻一代方能肩负起历史重任。</div>
+          </div>
+        </div>
+
+        <!-- 词汇库 -->
+        <div style="margin-top:12px;">
+          <strong style="font-size:12.5px;color:var(--text);">💎 提分高频词汇推荐：</strong>
+          <div class="vocab-grid">
+            <span class="vocab-pill">vigorous physique (强健的体魄)</span>
+            <span class="vocab-pill">antidote to stress (缓解压力的解药)</span>
+            <span class="vocab-pill">National Fitness Strategy (全民健身战略)</span>
+            <span class="vocab-pill">sedentary lifestyle (久坐不动的生活方式)</span>
+            <span class="vocab-pill">physical inactivity (缺乏身体锻炼)</span>
+            <span class="vocab-pill">sound minds in sound bodies (健全体魄与心智)</span>
+          </div>
+        </div>
+
+        <!-- 真题套用 -->
+        <div class="case-toggle" onclick="toggleCaseContent('case_t5')">
+          <span>🎯 历年真题实战套用示范 (点击展开 2026英二最新真题/2021英二) ▼</span>
+        </div>
+        <div class="case-content" id="case_t5">
+          • <strong>2026年英语二最新真题（儿童户外活动与身心健康调查）</strong>：首段套用<strong>图表首段模板</strong>，二段套用<strong>框架1</strong>（将运动形式填入 <code>outdoor activities and nature exploration</code>，阐述大自然活动对儿童视力保护、骨骼生长与性格开朗的不可替代价值），尾段套用<strong>专属尾段1</strong>。<br>
+          • <strong>2021年英语二（居民体育健身花费增长）</strong>：二段套用<strong>框架1</strong>，填入 <code>fitness gear and sports subscriptions</code>，论证国民对生命健康质量的高度重视。
+        </div>
+      </div>
+
+      <!-- CARD: 主题六 科技创新与数字生活 -->
+      <div class="guide-card" data-guide-stage="p2" data-guide-cat="t6">
+        <div class="guide-card-header">
+          <h3>🤖 主题六：科技创新、数字生活与理性对待</h3>
+          <span class="guide-theme-badge">2026真题重点</span>
+        </div>
+        <div class="ideas-box">
+          <strong>🎯 第二段核心思路与论证脉络：</strong><br>
+          • <strong>科技第一生产力</strong>：生成式AI、智能机器人（如2026英一智能护老机器人）极大解放繁重人力，赋能医疗养老、工业制造与日常生活；<br>
+          • <strong>科技向善（Tech for Good）</strong>：智能技术填补劳动力空缺，提供高精度的全天候守护与情感陪伴；<br>
+          • <strong>警惕双刃剑与异化</strong>：防止沉溺虚拟屏幕（低头族）、算法信息茧房以及人机情感疏离，倡导技术服务于人。
+        </div>
+
+        <!-- 主题6 专属第一段 -->
+        <div class="theme-para-section">
+          <div class="theme-para-title">
+            <span class="para-badge">第一段·首段</span>
+            <span>本主题专属第一段引入模板 (适配2026英一智能养老机器人真题)</span>
+          </div>
+          <div class="framework-block">
+            <div class="framework-header">
+              <span class="framework-title">🎨 英一图画/双图表首段（养老机器人/人工智能赋能）</span>
+              <button class="btn-copy-template" onclick="copyTemplate('t6_p1_temp', this)">📋 复制首段</button>
+            </div>
+            <div class="template-en" id="t6_p1_temp">The drawing/chart vividly presents a fascinating technological innovation in which <span class="template-slot">[智能场景，如: an elderly-care robot is diligently assisting senior citizens in daily life]</span>. This eye-opening depiction mirrors the widespread application of <span class="template-slot">[科技主题，如: artificial intelligence and smart robotics]</span>, highlighting how technological breakthroughs are revolutionizing human society.</div>
+            <div class="template-cn"><strong>【中文对照】</strong>这幅图画/图表生动展现了一个迷人的科技创新场景，其中<span class="template-slot">[一台养老照护机器人正在悉心照料老人的日常生活]</span>。这一令人耳目一新的描摹折射出了<span class="template-slot">[人工智能与智能机器人技术]</span>的广泛应用，突显了技术突破正如何深刻变革人类社会。</div>
+          </div>
+        </div>
+
+        <!-- 主题6 第二段论证 -->
+        <div class="theme-para-section">
+          <div class="theme-para-title">
+            <span class="para-badge">第二段·正文</span>
+            <span>本主题第二段核心论证模板（智慧升级 vs 防范数字异化）</span>
+          </div>
+          <div class="framework-block">
+            <div class="framework-header">
+              <span class="framework-title">🌟 框架 1（科技赋能 / 智慧升级与造福生活型）</span>
+              <div style="display:flex;gap:6px;align-items:center;">
+                <span class="framework-tag tag-pos">科技赋能</span>
+                <button class="btn-copy-template" onclick="copyTemplate('t6_p2_f1', this)">📋 复制二段框架1</button>
+              </div>
+            </div>
+            <div class="template-en" id="t6_p2_f1">The booming emergence of <span class="template-slot">[前沿科技主题词]</span> is fundamentally transforming our social landscape and living patterns. First and foremost, driven by groundbreaking breakthroughs in big data and machine learning, intelligent devices are now capable of relieving human beings from repetitive and exhausting chores, substantially elevating social productivity. In addition, these cutting-edge innovations directly cater to urgent social demands; taking healthcare and senior care as examples, compassionate smart technologies provide elderly citizens with round-the-clock nursing care and psychological companion. Undeniably, science and technology, when guided by goodwill, serve as a potent engine propelling human civilization forward.</div>
+            <div class="template-cn"><strong>【中文对照】</strong><span class="template-slot">[科技主题词]</span>的蓬勃涌现，正在从根本上重塑我们的社会面貌与生活模式。首先，在大数据与机器学习突破性进展的驱动下，智能设备如今有能力将人类从重复繁重的琐事中解脱出来，大幅提高社会生产力。此外，这些前沿创新直接契合了紧迫的社会刚需；以医疗健康和养老照料为例，充满人文关怀的智慧科技为老年人提供了全天候的护理陪伴。无可否认，当科学技术被善意所指引时，它便是推动人类文明向前迈进的强大引擎。</div>
+          </div>
+          <div class="framework-block">
+            <div class="framework-header">
+              <span class="framework-title">⚠️ 框架 2（双刃剑平衡 / 防范数字异化与冷漠型）</span>
+              <div style="display:flex;gap:6px;align-items:center;">
+                <span class="framework-tag tag-ref">防范异化</span>
+                <button class="btn-copy-template" onclick="copyTemplate('t6_p2_f2', this)">📋 复制二段框架2</button>
+              </div>
+            </div>
+            <div class="template-en" id="t6_p2_f2">While technological marvels have brought about undeniable conveniences, their adverse side effects cannot be lightly glossed over. Chief among the hazards is the erosion of authentic human connections; captivated by glossy virtual interfaces and personalized algorithmic feeds, individuals are increasingly alienated from face-to-face communication, creating cold barriers between friends and family members. Moreover, excessive reliance on automated tools inevitably dulls people's capacity for independent reflection and creative craftsmanship. It is high time we recognized that technology should remain a faithful servant rather than an authoritative master dictating our emotional life.</div>
+            <div class="template-cn"><strong>【中文对照】</strong>尽管科技奇迹带来了不可否认的便利，但其负面副作用却绝不能被轻易忽视。首要隐患在于真实人际连接的遭受侵蚀；受困于光鲜的虚拟界面和个性化的算法投喂，个体与面对面的真实沟通渐行渐远，在朋友与家人之间筑起了冷冰冰的高墙。此外，对自动化工具的过度依赖不可避免地会钝化人们独立思考与创造性构思的能力。我们是时候深刻认识到：技术应当始终作为忠实的仆人，而非主宰我们情感生活的霸道主人。</div>
+          </div>
+        </div>
+
+        <!-- 主题6 专属第三段 -->
+        <div class="theme-para-section">
+          <div class="theme-para-title">
+            <span class="para-badge">第三段·尾段</span>
+            <span>本主题专属第三段措施升华模板</span>
+          </div>
+          <div class="framework-block">
+            <div class="framework-header">
+              <span class="framework-title">🏆 尾段模板 1（科技向善与推动智慧赋能民生）</span>
+              <button class="btn-copy-template" onclick="copyTemplate('t6_p3_f1', this)">📋 复制尾段1</button>
+            </div>
+            <div class="template-en" id="t6_p3_f1">From what has been explored above, technology is inherently neutral, and its true value hinges on human intentions. On one hand, policymakers should formulate ethical guidelines and safety regulations to ensure that technology serves human wellbeing. On the other hand, individuals ought to preserve authentic human empathy, ensuring machines remain our helpful servants rather than masters.</div>
+            <div class="template-cn"><strong>【中文对照】</strong>综上所析，科技本身是中性的，其真实价值取决于人类的善意与初衷。一方面，政策制定者应制定伦理指引与安全监管规范，确保科技造福人类福祉；另一方面，每个人应守护真实的人文共情，确保机器始终作为我们的得力助手而非主宰。</div>
+          </div>
+        </div>
+
+        <!-- 词汇库 -->
+        <div style="margin-top:12px;">
+          <strong style="font-size:12.5px;color:var(--text);">💎 提分高频词汇推荐：</strong>
+          <div class="vocab-grid">
+            <span class="vocab-pill">groundbreaking breakthroughs (突破性进展)</span>
+            <span class="vocab-pill">round-the-clock care (全天候照护)</span>
+            <span class="vocab-pill">propel civilization forward (推动文明进步)</span>
+            <span class="vocab-pill">erosion of human connections (人际连接侵蚀)</span>
+            <span class="vocab-pill">faithful servant (忠诚的仆人)</span>
+            <span class="vocab-pill">tech for social good (科技向善)</span>
+          </div>
+        </div>
+
+        <!-- 真题套用 -->
+        <div class="case-toggle" onclick="toggleCaseContent('case_t6')">
+          <span>🎯 历年真题实战套用示范 (点击展开 2026英一最新真题/2015英一) ▼</span>
+        </div>
+        <div class="case-content" id="case_t6">
+          • <strong>2026年英语一最新真题（养老机器人进入千家万户）</strong>：首段套用<strong>专属科技首段</strong>，二段套用<strong>框架1</strong>，填入 <code>smart elderly-care robots (智能养老看护机器人)</code>，论述在深度老龄化背景下智能技术如何弥补家庭护工短缺、提供精细照护与健康监测。尾段套用<strong>专属尾段1</strong>。<br>
+          • <strong>2015年英语一（聚会全员低头刷手机）</strong>：二段套用<strong>框架2</strong>，深刻批判屏幕与虚拟世界对真实人际温情的隔离，呼吁放下手机、回归真情实感。
+        </div>
+      </div>
+
+      <!-- CARD: 主题七 社会民生、尊老养老与生态文明 -->
+      <div class="guide-card" data-guide-stage="p2" data-guide-cat="t7">
+        <div class="guide-card-header">
+          <h3>🌱 主题七：社会民生、尊老养老与生态文明</h3>
+          <span class="guide-theme-badge">主题 7</span>
+        </div>
+        <div class="ideas-box">
+          <strong>🎯 第二段核心思路与论证脉络：</strong><br>
+          • <strong>尊老爱幼与道德伦理</strong>：百善孝为先（<code>filial piety</code>），赡养父母既是法定义务，更是人性良知与反哺深恩的根本体现；<br>
+          • <strong>全社会关怀机制</strong>：老龄化背景下，政府、社区与家庭协同构建养老托底保障网络（<code>social safety net</code>）；<br>
+          • <strong>绿水青山就是金山银山</strong>：人与自然和谐共生（<code>harmonious coexistence</code>），走绿色低碳可持续发展之路。
+        </div>
+
+        <!-- 主题7 专属第一段 -->
+        <div class="theme-para-section">
+          <div class="theme-para-title">
+            <span class="para-badge">第一段·首段</span>
+            <span>本主题专属第一段引入模板</span>
+          </div>
+          <div class="framework-block">
+            <div class="framework-header">
+              <span class="framework-title">🎨 英一图画首段（赡养老弱/母子情深/绿色环保）</span>
+              <button class="btn-copy-template" onclick="copyTemplate('t7_p1_cart', this)">📋 复制首段</button>
+            </div>
+            <div class="template-en" id="t7_p1_cart">The touching drawing depicts a heart-warming scene where <span class="template-slot">[场景，如: a son is tenderly holding his elderly mother's hand / volunteers are planting trees to green the hills]</span>. Simple as it is, this picture powerfully mirrors the crucial significance of <span class="template-slot">[主题，如: filial piety and eldercare / environmental protection]</span> in our society.</div>
+            <div class="template-cn"><strong>【中文对照】</strong>这幅感人的图画描绘了一个暖心的场景，其中<span class="template-slot">[一个儿子温柔地牵着年迈母亲的手/志愿者正在植树造林绿化荒山]</span>。画面虽简洁，却有力折射出了<span class="template-slot">[孝亲敬老/环境保护]</span>在我们社会中的至关重要性。</div>
+          </div>
+        </div>
+
+        <!-- 主题7 第二段论证 -->
+        <div class="theme-para-section">
+          <div class="theme-para-title">
+            <span class="para-badge">第二段·正文</span>
+            <span>本主题第二段核心论证模板（尊老敬老 vs 绿色生态）</span>
+          </div>
+          <div class="framework-block">
+            <div class="framework-header">
+              <span class="framework-title">🌟 框架 1（尊老敬老 / 社会担当与人文关怀型）</span>
+              <div style="display:flex;gap:6px;align-items:center;">
+                <span class="framework-tag tag-pos">敬老反哺</span>
+                <button class="btn-copy-template" onclick="copyTemplate('t7_p2_f1', this)">📋 复制二段框架1</button>
+              </div>
+            </div>
+            <div class="template-en" id="t7_p2_f1">The heartfelt scene depicted in the picture encapsulates the warm conscience and enduring ethical pillars of human society. In the first place, filial piety has been celebrated as a quintessential Chinese virtue since ancient times; respecting and caring for senior citizens is not merely a legal obligation, but a sacred moral debt we owe to those who have dedicated their best years to nurturing the younger generation. In the second place, as our society marches into an aging era, providing the elderly with adequate material security and empathetic spiritual companionship is critical to maintaining social harmony and stability. A society's true degree of civilization is ultimately measured by how respectfully it treats its most vulnerable seniors.</div>
+            <div class="template-cn"><strong>【中文对照】</strong>图中所描绘的温情场景，凝聚着人类社会的温暖良知与历久弥新的伦理支柱。首先，百善孝为先，自古以来就是中华民族的根本美德；尊敬并关爱老年人，不仅是一项法定义务，更是我们欠那些将一生中最美好年华奉献给抚育后代的长辈们的一笔神圣道德恩情。其次，随着我们的社会步入老龄化时代，为老年人提供充足的物质保障与体贴入微的精神陪伴，对维系社会和谐与长治久安至关重要。一个社会的真实文明高度，归根结底取决于它如何体面、尊重地对待最脆弱的老年群体。</div>
+          </div>
+          <div class="framework-block">
+            <div class="framework-header">
+              <span class="framework-title">⚠️ 框架 2（绿色生态 / 低碳减排与人与自然共生型）</span>
+              <div style="display:flex;gap:6px;align-items:center;">
+                <span class="framework-tag tag-ref">绿色生态</span>
+                <button class="btn-copy-template" onclick="copyTemplate('t7_p2_f2', this)">📋 复制二段框架2</button>
+              </div>
+            </div>
+            <div class="template-en" id="t7_p2_f2">The thought-provoking message underlined here directly echoes the urgent call for ecological civilization. First and foremost, nature is the ultimate cradle of all living beings; the wanton destruction of our ecosystems and relentless depletion of natural resources will inevitably trigger destructive feedback upon human survival itself. Furthermore, pursuing green, circular, and low-carbon development has become an imperative international consensus. By curbing excessive emissions and championing eco-friendly practices in daily life, such as <span class="template-slot">[环保行动]</span>, we are safeguarding lucid waters and lush mountains as our most invaluable wealth for generations to come.</div>
+            <div class="template-cn"><strong>【中文对照】</strong>此处所强调的引人深思的信息，直接呼应了建设生态文明的时代紧迫呼唤。首先，大自然是所有生灵的最终摇篮；对生态系统的肆意破坏以及对自然资源的无节制索取，势必会对人类生存本身造成灾难性的反噬。此外，走绿色、循环、低碳的发展道路已成为不容置疑的国际共识。通过在日常生活中遏制过量排放、倡导环保实践（例如<span class="template-slot">[环保行动]</span>），我们正在守护绿水青山，使之成为造福子孙后代最弥足珍贵的无价财富。</div>
+          </div>
+        </div>
+
+        <!-- 主题7 专属第三段 -->
+        <div class="theme-para-section">
+          <div class="theme-para-title">
+            <span class="para-badge">第三段·尾段</span>
+            <span>本主题专属第三段措施升华模板</span>
+          </div>
+          <div class="framework-block">
+            <div class="framework-header">
+              <span class="framework-title">🏆 尾段模板 1（健全养老保障与人与自然共生）</span>
+              <button class="btn-copy-template" onclick="copyTemplate('t7_p3_f1', this)">📋 复制尾段1</button>
+            </div>
+            <div class="template-en" id="t7_p3_f1">In summary, promoting <span class="template-slot">[尊老养老/生态文明]</span> demands joint commitments across society. The government should allocate more fiscal resources into building senior care networks / environmental preservation. Simultaneously, every individual must translate moral awareness into everyday actions. Only then can we pass down our civilization and ensure harmonious coexistence.</div>
+            <div class="template-cn"><strong>【中文对照】</strong>综上所述，推进<span class="template-slot">[尊老养老/生态文明]</span>需要全社会共同承诺。政府应当投入更多财政资源建设养老保障网络/环境保护机制；与此同时，每个人都应将道德自觉转化为日常行动。唯有如此，我们方能传承人类文明、实现和谐共生。</div>
+          </div>
+        </div>
+
+        <!-- 词汇库 -->
+        <div style="margin-top:12px;">
+          <strong style="font-size:12.5px;color:var(--text);">💎 提分高频词汇推荐：</strong>
+          <div class="vocab-grid">
+            <span class="vocab-pill">quintessential virtue (根本传统美德)</span>
+            <span class="vocab-pill">filial piety (孝道/孝顺)</span>
+            <span class="vocab-pill">spiritual companionship (精神陪伴)</span>
+            <span class="vocab-pill">ecological civilization (生态文明)</span>
+            <span class="vocab-pill">lucid waters and lush mountains (绿水青山)</span>
+            <span class="vocab-pill">harmonious coexistence (和谐共生)</span>
+          </div>
+        </div>
+
+        <!-- 真题套用 -->
+        <div class="case-toggle" onclick="toggleCaseContent('case_t7')">
+          <span>🎯 历年真题实战套用示范 (点击展开 2026英一/2014英一/2011英一) ▼</span>
+        </div>
+        <div class="case-content" id="case_t7">
+          • <strong>2026年英语一（智慧养老与尊老爱老）</strong>：首段套用<strong>专属首段</strong>，二段套用<strong>框架1</strong>（孝亲美德），尾段套用<strong>专属尾段1</strong>。<br>
+          • <strong>2014年英语一（母子相携相伴）</strong>：二段套用<strong>框架1</strong>，论述子女长大成人反哺年迈父母的传统美德。<br>
+          • <strong>2011年英语一（旅途生态保护 / 随手捡拾垃圾）</strong>：二段套用<strong>框架2</strong>，倡导绿色低碳出行与公众环保责任意识。
+        </div>
+      </div>
+
+      <!-- ================= PART 3: 第三段·尾段建议与展望集中突破模块 ================= -->
+      <div class="guide-card" data-guide-stage="p3" data-guide-cat="p3">
+        <div class="guide-card-header">
+          <h3>🏁 第三段：总结全文、建议措施与升华展望通用框架</h3>
+          <span class="guide-theme-badge">尾段突破</span>
+        </div>
+        <div class="ideas-box">
+          <strong>📌 尾段核心任务与原则：</strong><br>
+          • <strong>字数控制</strong>：35~45 词，写 3 句话即可；<br>
+          • <strong>经典结构</strong>：第 1 句总结全文论点 ➔ 第 2 句提出 2 条多主体具体措施（政府法规/媒体倡导/青年践行） ➔ 第 3 句倒装句升华未来（<code>Only in this way can we...</code>）。
+        </div>
+
+        <!-- 尾段框架 A -->
+        <div class="framework-block">
+          <div class="framework-header">
+            <span class="framework-title">🏆 万能尾段框架 A（正面倡导、青年践行与时代升华型）</span>
+            <div style="display:flex;gap:6px;align-items:center;">
+              <span class="framework-tag tag-pos">褒扬升华</span>
+              <button class="btn-copy-template" onclick="copyTemplate('g_p3_pos', this)">📋 复制框架A</button>
+            </div>
+          </div>
+          <div class="template-en" id="g_p3_pos">From what has been discussed above, we may safely draw the conclusion that <span class="template-slot">[主题词]</span> exerts an irreplaceable and profound influence on both personal self-realization and long-term social progress. Therefore, it is imperative for us to embrace and cultivate this spirit. On the one hand, public media should launch comprehensive campaigns to foster a conducive atmosphere. On the other hand, we contemporary youngsters ought to translate this virtue into daily actions, forging ahead with unwavering conviction. Only in this way can we embrace a more promising future and contribute our share to national rejuvenation.</div>
+          <div class="template-cn"><strong>【中文对照】</strong>综上所述，我们可以有把握地得出结论：<span class="template-slot">[主题词]</span>对个人自我实现和长远社会进步都产生着不可替代且深远的影响。因此，我们必须拥抱并培养这种精神。一方面，大众媒体应开展广泛宣传以营造良好氛围；另一方面，我们当代青年应当将这种美德转化为日常行动，坚定信念奋勇向前。唯有如此，我们才能迎接更加光明的未来，为民族复兴贡献力量。</div>
+        </div>
+
+        <!-- 尾段框架 B -->
+        <div class="framework-block">
+          <div class="framework-header">
+            <span class="framework-title">⚖️ 万能尾段框架 B（综合应对、法律制度与理性平衡型）</span>
+            <div style="display:flex;gap:6px;align-items:center;">
+              <span class="framework-tag tag-ref">治理规范</span>
+              <button class="btn-copy-template" onclick="copyTemplate('g_p3_reg', this)">📋 复制框架B</button>
+            </div>
+          </div>
+          <div class="template-en" id="g_p3_reg">In the light of the facts detailed above, it is evident that <span class="template-slot">[负面现象/待解问题]</span> calls for prompt and concerted efforts from all quarters of society. To reverse this undesirable trend, effective measures should be implemented immediately. First and foremost, relevant authorities need to enact more stringent regulations to supervise market behaviors and penalize irregular activities. In addition, the public should enhance their rational awareness and resist blind impulses. With the joint endeavors of the government, society, and each individual, we have every reason to believe that a sound, balanced, and sustainable environment will be achieved in the near future.</div>
+          <div class="template-cn"><strong>【中文对照】</strong>鉴于上述事实，显而易见的是，<span class="template-slot">[负面现象]</span>亟需全社会各界迅速协同采取措施。为扭转这一不良趋势，应当立即落实有效措施。首先，有关部门需出台更加严格的规范来监督市场行为、惩处违规活动。此外，公众应提高理性意识，抵制盲目冲动。在政府、社会与个人的共同努力下，我们完全有理由相信，一个健全、平衡且可持续的环境必将在不久的将来得以实现。</div>
+        </div>
+
+        <!-- 尾段万能措施功能句库 -->
+        <div style="margin-top:12px;">
+          <strong style="font-size:12.5px;color:var(--text);">💎 尾段多主体万能措施与展望功能句：</strong>
+          <div class="vocab-grid">
+            <span class="vocab-pill">Authorities should enact stricter regulations (主管部门出台更严法规)</span>
+            <span class="vocab-pill">Mass media should foster a healthy atmosphere (大众媒体营造健康氛围)</span>
+            <span class="vocab-pill">Translate moral awareness into daily actions (将道德自觉化为日常行动)</span>
+            <span class="vocab-pill">Only in this way can we embrace a brighter future (唯有如此才能拥抱光明未来)</span>
+            <span class="vocab-pill">Contribute our humble share to national rejuvenation (为民族复兴贡献绵薄之力)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= PART 4: 小作文·应用文攻坚模块 ================= -->
+      <div class="guide-card" data-guide-stage="small" data-guide-cat="small">
+        <div class="guide-card-header">
+          <h3>✉️ 通用小作文核心功能模块与高频题型速查</h3>
+          <span class="guide-theme-badge">小作文满分</span>
+        </div>
+        <div class="ideas-box">
+          <strong>📌 小作文大纲要求与考场原则：</strong><br>
+          • 约 <strong>100 词</strong>，10分。英一英二大纲与评分完全一致；<br>
+          • <strong>文体类型</strong>：书信（建议、推荐、邀请、投诉、道歉、感谢等）、通知告示（Notice）、纪要；<br>
+          • <strong>标准结构</strong>：称呼 ➔ 第一段说明事由与目的 ➔ 第二段展开2~3点细节（时间、地点、建议、方案） ➔ 第三段客套结语 ➔ 署名（通常为 <code>Yours sincerely, Li Ming</code>）。
+        </div>
+
+        <table class="table-compare">
+          <tr>
+            <th>信件类型</th>
+            <th>首段目的经典句式 (第一段)</th>
+            <th>二段展开核心功能句 (第二段)</th>
+          </tr>
+          <tr>
+            <td><strong>建议信<br>(Suggestion)</strong></td>
+            <td>I am writing this letter to put forward several constructive suggestions regarding [具体事项].</td>
+            <td>First of all, I strongly propose that you should [建议1]. Furthermore, it would be highly advisable to [建议2].</td>
+          </tr>
+          <tr>
+            <td><strong>推荐信<br>(Recommendation)</strong></td>
+            <td>I am writing this letter with great delight to recommend [推荐书目/电影/人选] to you.</td>
+            <td>The primary reason for my recommendation is that [原因1]. Not only does it provide [收获], but it also enhances [能力].</td>
+          </tr>
+          <tr>
+            <td><strong>邀请信<br>(Invitation)</strong></td>
+            <td>On behalf of [主办方], I deem it a great privilege to cordially invite you to attend [活动名称].</td>
+            <td>The event is scheduled to take place at [地点] on [时间]. It would be our supreme honor if you could deliver a keynote speech.</td>
+          </tr>
+          <tr>
+            <td><strong>道歉/投诉信<br>(Apology / Complaint)</strong></td>
+            <td>I am writing to express my sincere apologies for [事由] / lodge a complaint regarding the inferior quality of [商品/服务].</td>
+            <td>Please accept my heartfelt apologies for the inconvenience. / I would be exceedingly grateful if you could arrange a replacement or refund.</td>
+          </tr>
+          <tr>
+            <td><strong>通知告示<br>(Notice)</strong></td>
+            <td>Notice is hereby given that [活动名称] is scheduled to be held from [时间] to [时间] in [地点]. (注意：标题居中大写 NOTICE，无称呼)</td>
+            <td>All interested students are warmly welcome to participate. Those wishing to sign up should submit the application form before [截止日期].</td>
+          </tr>
+        </table>
+
+        <!-- 万能尾段客套结语 -->
+        <div class="framework-block" style="margin-top:12px;">
+          <div class="framework-header">
+            <span class="framework-title">📌 小作文万能客套结语与落款</span>
+            <button class="btn-copy-template" onclick="copyTemplate('small_outro_g', this)">📋 复制结语</button>
+          </div>
+          <div class="template-en" id="small_outro_g">I would be exceedingly grateful if you could take my suggestions into consideration. Looking forward to your prompt response.
+
+Yours sincerely,
+Li Ming</div>
+          <div class="template-cn"><strong>【中文对照】</strong>如果您能考虑我的建议，我将不胜感激。期待您的尽快回复。<br>您真诚的，李明</div>
+        </div>
+      </div>
+
+      <!-- ================= PART 5: 手机添加到主屏幕指南 ================= -->
+      <div class="guide-card" data-guide-stage="strategy" data-guide-cat="strategy">
+        <div class="guide-card-header">
+          <h3>📱 手机添加到主屏幕指南 (PWA 离线使用)</h3>
+          <span class="guide-theme-badge">随身背诵</span>
+        </div>
+        <ul style="padding-left:18px;margin:8px 0;font-size:12.5px;line-height:1.75;color:var(--text);">
+          <li><strong>iPhone / iPad (Safari)</strong>：点击底部中间分享按钮 ➔ 选择<strong>「添加到主屏幕」</strong>，生成专属 App 图标，随时点击即背！</li>
           <li><strong>Android (Chrome / 微信 / 夸克)</strong>：点击右上角菜单 ➔ 选择<strong>「添加至主屏幕 / 创建桌面快捷方式」</strong>。</li>
-          <li><strong>墨墨记忆卡导入</strong>：手机打开墨墨 App，选择「批量制卡」➔「从文本导入」，直接粘贴 `墨墨记忆卡/00_考研英语作文_历年主题词及拓展_记忆卡.txt` 全部内容即可导入！</li>
+          <li><strong>墨墨记忆卡导入</strong>：手机打开墨墨 App，选择「批量制卡」➔「从文本导入」，直接粘贴 <code>墨墨记忆卡/00_考研英语作文_历年主题词及拓展_记忆卡.txt</code> 全部内容即可！</li>
+          <li><strong>本地持久化记忆</strong>：本应用已具备学习进度持久记忆功能，每次打开自动恢复至上次学习的卡片位置与筛选状态。</li>
         </ul>
       </div>
+
     </div>
 
   </main>
@@ -1832,6 +3084,192 @@
 
     function saveMastered() {
       localStorage.setItem(KEY_MASTERED, JSON.stringify([...masteredSet]));
+    }
+  // ==========================================
+    // Guide View Features (Stage Nav, Theme Filter, Search, Copy, Accordion)
+    // ==========================================
+    let currentGuideStage = 'all';
+    let currentGuideTheme = 'all';
+
+    function switchGuideStage(stage, btnEl) {
+      currentGuideStage = stage;
+      document.querySelectorAll('.guide-stage-btn').forEach(el => el.classList.remove('active'));
+      if (btnEl) {
+        btnEl.classList.add('active');
+      } else {
+        const matchingBtn = document.querySelector(`.guide-stage-btn[data-stage="${stage}"]`);
+        if (matchingBtn) matchingBtn.classList.add('active');
+      }
+
+      const input = document.getElementById('guideSearchInput');
+      if (input) input.value = '';
+      const clearBtn = document.getElementById('guideSearchClear');
+      if (clearBtn) clearBtn.style.display = 'none';
+
+      // Reset theme pill to 'all' if switching stages
+      if (stage !== 'p2') {
+        currentGuideTheme = 'all';
+        document.querySelectorAll('.guide-pill').forEach(el => el.classList.remove('active'));
+        const allPill = document.querySelector('.guide-pill[data-theme="all"]');
+        if (allPill) allPill.classList.add('active');
+      }
+
+      const cards = document.querySelectorAll('.guide-card');
+      cards.forEach(card => {
+        const cardStage = card.getAttribute('data-guide-stage');
+        if (stage === 'all' || cardStage === stage) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      const guideView = document.getElementById('viewGuide');
+      if (guideView) guideView.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function filterGuideByTheme(themeCat, pillEl) {
+      currentGuideTheme = themeCat;
+      document.querySelectorAll('.guide-pill').forEach(el => el.classList.remove('active'));
+      if (pillEl) {
+        pillEl.classList.add('active');
+      } else {
+        const matchingPill = document.querySelector(`.guide-pill[data-theme="${themeCat}"]`);
+        if (matchingPill) matchingPill.classList.add('active');
+      }
+
+      // Highlight the p2 stage button
+      currentGuideStage = 'p2';
+      document.querySelectorAll('.guide-stage-btn').forEach(el => el.classList.remove('active'));
+      const p2Btn = document.querySelector('.guide-stage-btn[data-stage="p2"]');
+      if (p2Btn) p2Btn.classList.add('active');
+
+      const input = document.getElementById('guideSearchInput');
+      if (input) input.value = '';
+      const clearBtn = document.getElementById('guideSearchClear');
+      if (clearBtn) clearBtn.style.display = 'none';
+
+      const cards = document.querySelectorAll('.guide-card');
+      let targetCard = null;
+      cards.forEach(card => {
+        const cardStage = card.getAttribute('data-guide-stage');
+        const cardCat = card.getAttribute('data-guide-cat');
+        if (cardStage === 'p2') {
+          if (themeCat === 'all' || cardCat === themeCat) {
+            card.style.display = 'block';
+            if (cardCat === themeCat) targetCard = card;
+          } else {
+            card.style.display = 'none';
+          }
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      if (targetCard) {
+        targetCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else {
+        const guideView = document.getElementById('viewGuide');
+        if (guideView) guideView.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    function handleGuideSearch() {
+      const input = document.getElementById('guideSearchInput');
+      const clearBtn = document.getElementById('guideSearchClear');
+      const query = input.value.trim().toLowerCase();
+
+      if (!query) {
+        if (clearBtn) clearBtn.style.display = 'none';
+        if (currentGuideStage === 'p2' && currentGuideTheme !== 'all') {
+          filterGuideByTheme(currentGuideTheme);
+        } else {
+          switchGuideStage(currentGuideStage);
+        }
+        return;
+      }
+
+      if (clearBtn) clearBtn.style.display = 'block';
+      document.querySelectorAll('.guide-stage-btn').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.guide-pill').forEach(el => el.classList.remove('active'));
+
+      const cards = document.querySelectorAll('.guide-card');
+      cards.forEach(card => {
+        const text = card.innerText.toLowerCase();
+        if (text.includes(query)) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    function clearGuideSearch() {
+      const input = document.getElementById('guideSearchInput');
+      if (input) input.value = '';
+      const clearBtn = document.getElementById('guideSearchClear');
+      if (clearBtn) clearBtn.style.display = 'none';
+      if (currentGuideStage === 'p2' && currentGuideTheme !== 'all') {
+        filterGuideByTheme(currentGuideTheme);
+      } else {
+        switchGuideStage(currentGuideStage);
+      }
+    }
+
+    function toggleCaseContent(id) {
+      const el = document.getElementById(id);
+      if (el) {
+        el.classList.toggle('open');
+      }
+    }
+
+    function copyTemplate(elementId, btnEl) {
+      const target = document.getElementById(elementId);
+      if (!target) return;
+      
+      const textToCopy = target.innerText.trim();
+
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(textToCopy).then(() => {
+          showCopySuccess(btnEl);
+        }).catch(err => {
+          fallbackCopyText(textToCopy, btnEl);
+        });
+      } else {
+        fallbackCopyText(textToCopy, btnEl);
+      }
+    }
+
+    function fallbackCopyText(text, btnEl) {
+      const textArea = document.createElement("textarea");
+      textArea.value = text;
+      textArea.style.position = "fixed";
+      textArea.style.left = "-9999px";
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+      try {
+        document.execCommand('copy');
+        showCopySuccess(btnEl);
+      } catch (err) {
+        alert("请手动复制模板内容");
+      }
+      document.body.removeChild(textArea);
+    }
+
+    function showCopySuccess(btnEl) {
+      const origText = btnEl.innerHTML;
+      btnEl.innerHTML = "✓ 已复制!";
+      btnEl.style.borderColor = "#10b981";
+      btnEl.style.color = "#10b981";
+      if (typeof showResumeToast === 'function') {
+        showResumeToast("📋 模板已成功复制到剪贴板，可直接粘贴！");
+      }
+      setTimeout(() => {
+        btnEl.innerHTML = origText;
+        btnEl.style.borderColor = "";
+        btnEl.style.color = "";
+      }, 2000);
     }
   </script>
 </body>
